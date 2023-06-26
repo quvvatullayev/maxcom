@@ -88,3 +88,15 @@ urlpatterns += [
     path('card/get/<int:pk>/', CardGetIdView.as_view()),
     path('card/get/', CardGetView.as_view()),
 ]
+
+from .views.order import(
+    OrderCreateView,
+    OrderDeleteView,
+    OrderGetView,
+)
+
+urlpatterns += [
+    path('order/create/', OrderCreateView.as_view()),
+    path('order/delete/<int:pk>/', OrderDeleteView.as_view()),
+    path('order/get/', OrderGetView.as_view()),
+]
