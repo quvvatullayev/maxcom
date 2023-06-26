@@ -46,3 +46,19 @@ urlpatterns += [
     path('product/get/<int:pk>/', ProductGetIdView.as_view()),
     path('product/get/', ProductGetView.as_view()),
 ]
+
+from .views.productimg import(
+    ProductImageCreateView,
+    ProductImageUpdateView,
+    ProductImageDeleteView,
+    ProductImageGetIdView,
+    ProductImageGetView,
+)
+
+urlpatterns += [
+    path('productimage/create/', ProductImageCreateView.as_view()),
+    path('productimage/update/<int:pk>/', ProductImageUpdateView.as_view()),
+    path('productimage/delete/<int:pk>/', ProductImageDeleteView.as_view()),
+    path('productimage/get/<int:pk>/', ProductImageGetIdView.as_view()),
+    path('productimage/get/', ProductImageGetView.as_view()),
+]
