@@ -56,6 +56,18 @@ class Card(models.Model):
     def __str__(self) -> str:
         return self.product.name
     
+class Order(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    cout = models.IntegerField(default=1)
+    total = models.FloatField()
+    address = models.CharField(max_length=1000)
+    phone = models.CharField(max_length=20)
+    date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self) -> str:
+        return self.product.name
+    
 class Certificate(models.Model):
     name = models.CharField(max_length=225)
     image = models.ImageField(upload_to = 'certificate')

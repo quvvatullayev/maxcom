@@ -11,6 +11,7 @@ from .models import (
     Contaket,
     About,
     CompanyQuestion,
+    Order,
 )
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -73,6 +74,18 @@ class CardSerializer(serializers.ModelSerializer):
 class CreateCardSerializer(serializers.ModelSerializer):
     class Meta:
         model = Card
+        fields = "__all__"
+
+class OrderSerializer(serializers.ModelSerializer):
+    product = ProductSerializer()
+    user = serializers.StringRelatedField()
+    class Meta:
+        model = Order
+        fields = ['id', 'product', 'user', ]
+
+class CreateOrderSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Order
         fields = "__all__"
 
 class CertificateSerializer(serializers.ModelSerializer):
