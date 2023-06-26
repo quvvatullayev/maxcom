@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "drf_yasg",
     "rest_framework",
     'maxcom'
 ]
@@ -52,6 +53,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'core.urls'
+STATIC_ROOT = BASE_DIR / 'static'
 
 TEMPLATES = [
     {

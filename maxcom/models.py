@@ -28,7 +28,7 @@ class Product(models.Model):
     image = models.ImageField(upload_to='products',)
     short_description = models.CharField(max_length=1000)
     live = models.BooleanField(default=False)
-    like = models.BooleanField(default=False)
+    likes = models.BooleanField(default=False)
     status = models.BooleanField(default=False)
 
     def __str__(self):
@@ -46,7 +46,7 @@ class Like(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
-        return self.product.name
+        return self.liked_product.name
 
 class Card(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
@@ -57,7 +57,7 @@ class Card(models.Model):
         return self.product.name
     
 class Certificate(models.Model):
-    name = models.CharField()
+    name = models.CharField(max_length=225)
     image = models.ImageField(upload_to = 'certificate')
 
     def __str__(self) -> str:
