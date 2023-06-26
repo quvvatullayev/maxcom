@@ -33,7 +33,7 @@ class ProductSerializer(serializers.ModelSerializer):
     subcategory = SubCategorySerializer()
     class Meta:
         model = Product
-        fields = ['id', 'subcategory', 'name', 'brand', 'description', 'price', 'discount', 'image', 'short_description', 'live', 'like', 'status']
+        fields = ['id', 'subcategory', 'name', 'brand', 'description', 'price', 'discount', 'image', 'short_description', 'live', 'likes', 'status']
 
 class CreateProductSerializer(serializers.ModelSerializer):
     class Meta:

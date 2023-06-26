@@ -42,11 +42,11 @@ class ProductImage(models.Model):
         return self.product.name
     
 class Like(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    like_product = models.ForeignKey(Product, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
-        return self.liked_product.name
+        return self.like_product.name
 
 class Card(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)

@@ -30,3 +30,19 @@ urlpatterns += [
     path('subcategory/get/<int:pk>/', SubCategoryGetIdView.as_view()),
     path('subcategory/get/', SubCategoryGetView.as_view()),
 ]
+
+from .views.product import(
+    ProductCreateView,
+    ProductUpdateView,
+    ProductDeleteView,
+    ProductGetIdView,
+    ProductGetView,
+)
+
+urlpatterns += [
+    path('product/create/', ProductCreateView.as_view()),
+    path('product/update/<int:pk>/', ProductUpdateView.as_view()),
+    path('product/delete/<int:pk>/', ProductDeleteView.as_view()),
+    path('product/get/<int:pk>/', ProductGetIdView.as_view()),
+    path('product/get/', ProductGetView.as_view()),
+]
