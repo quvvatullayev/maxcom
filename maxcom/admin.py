@@ -12,6 +12,7 @@ from .models import (
     Contaket,
     About,
     CompanyQuestion,
+    Order,
 )
 
 admin.site.register(Category)
@@ -20,6 +21,7 @@ admin.site.register(Product)
 admin.site.register(ProductImage)
 admin.site.register(Like)
 admin.site.register(Card)
+admin.site.register(Order)
 admin.site.register(Certificate)
 admin.site.register(Contaket)
 admin.site.register(About)
