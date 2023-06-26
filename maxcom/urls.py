@@ -62,3 +62,13 @@ urlpatterns += [
     path('productimage/get/<int:pk>/', ProductImageGetIdView.as_view()),
     path('productimage/get/', ProductImageGetView.as_view()),
 ]
+
+from .views.like import(
+    LikeCreateView,
+    LikeDeleteView,
+)
+
+urlpatterns += [
+    path('like/create/', LikeCreateView.as_view()),
+    path('like/delete/<int:pk>/', LikeDeleteView.as_view()),
+]
