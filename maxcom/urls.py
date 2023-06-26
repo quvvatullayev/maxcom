@@ -72,3 +72,19 @@ urlpatterns += [
     path('like/create/', LikeCreateView.as_view()),
     path('like/delete/<int:pk>/', LikeDeleteView.as_view()),
 ]
+
+from .views.card import(
+    CardCreateView,
+    CardUpdateView,
+    CardDeleteView,
+    CardGetIdView,
+    CardGetView,
+)
+
+urlpatterns += [
+    path('card/create/', CardCreateView.as_view()),
+    path('card/update/<int:pk>/', CardUpdateView.as_view()),
+    path('card/delete/<int:pk>/', CardDeleteView.as_view()),
+    path('card/get/<int:pk>/', CardGetIdView.as_view()),
+    path('card/get/', CardGetView.as_view()),
+]
