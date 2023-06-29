@@ -181,6 +181,7 @@ from .views.userauth import(
     UserLogOutView,
     UserListView,
     UserAddAdminView,
+    UserDeleteAdminView,
 )
 
 urlpatterns += [
@@ -189,4 +190,5 @@ urlpatterns += [
     path('user/logout/', UserLogOutView.as_view()),
     path('user/list/', UserListView.as_view()),
     path('user/add/admin/<int:pk>/', UserAddAdminView.as_view()),
+    path('user/delete/admin/<int:pk>/', UserDeleteAdminView.as_view()),
 ]

@@ -87,11 +87,38 @@ class UserAddAdminView(APIView):
         }
     )
     def post(self, request:Request, pk:int):
-        r_user = request.user
-        if not r_user.is_staff:
+        r_user:User = request.user
+        if r_user.is_staff and r_user.is_superuser:
             user = User.objects.get(id=pk)
             user.is_staff = True
             user.save()
             return Response({'message':'You are admin'}, status=status.HTTP_200_OK)
         return Response({'message':'You are not admin'}, status=status.HTTP_400_BAD_REQUEST)
+        
+class UserDeleteAdminView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+    @swagger_auto_schema(
+        operation_description="Delete admin",
+        responses={
+            200: UserSerializer,
+            400: "Bad request",
+        }
+    )
+    def post(self, request:Request, pk:int):
+        r_user:User = request.user
+        if r_user.is_staff and r_user.is_superuser:
+            user = User.objects.get(id=pk)
+            user.is_staff = False
+            user.save()
+            return Response({'message':'You are not admin'}, status=status.HTTP_200_OK)
+        return Response({'message':'You are admin'}, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+
+
+
+
+
         
