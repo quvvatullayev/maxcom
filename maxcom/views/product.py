@@ -108,10 +108,28 @@ class ProductGetIdView(APIView):
         breand = Product.objects.filter(brand=breand)
         serializer_breand = ProductSerializer(breand, many=True)
 
+        subcategory_id = product.subcategory.id
+        subproducts = Product.objects.filter(subcategory=subcategory_id)
+        serializer_subproducts = ProductSerializer(subproducts, many=True)
+
+        # You may like it
+        category_id = product.subcategory.category.id
+        subcategorys = SubCategory.objects.filter(category=category_id)
+        serializer_subcategorys = SubCategorySerializer(subcategorys, many=True)
+        product_subcategorys = []
+        for subcategory in serializer_subcategorys.data:
+            subcategory_id = subcategory['id']
+            subproducts = Product.objects.filter(subcategory=subcategory_id)
+            serializer_subproducts = ProductSerializer(subproducts, many=True)
+            product_subcategorys += serializer_subproducts.data
+
+
         data = {
             'product': serializer.data,
             'product_image': serializer_image.data,
-            'breand': serializer_breand.data
+            'breand': serializer_breand.data,
+            'recommend': serializer_subproducts.data[-10:],
+            'product_subcategorys': product_subcategorys[:10],
         }
         return Response(data, status=status.HTTP_200_OK)
     
