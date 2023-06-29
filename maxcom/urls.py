@@ -37,6 +37,7 @@ from .views.product import(
     ProductDeleteView,
     ProductGetIdView,
     ProductGetView,
+    ProductGetSubCategoryView,
 )
 
 urlpatterns += [
@@ -45,6 +46,7 @@ urlpatterns += [
     path('product/delete/<int:pk>/', ProductDeleteView.as_view()),
     path('product/get/<int:pk>/', ProductGetIdView.as_view()),
     path('product/get/', ProductGetView.as_view()),
+    path('product/get/subcategory/<int:pk>/', ProductGetSubCategoryView.as_view()),
 ]
 
 from .views.productimg import(

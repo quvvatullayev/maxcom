@@ -104,3 +104,17 @@ class ProductGetView(APIView):
         products = Product.objects.all()
         serializer = ProductSerializer(products, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+    
+class ProductGetSubCategoryView(APIView):
+    @swagger_auto_schema(
+        operation_description="Get products by subcategory",
+        operation_summary="Get products by subcategory",
+        responses={
+            200: ProductSerializer,
+            400: "Bad request"
+        }
+    )
+    def get(self, request: Request, pk: int):
+        products = Product.objects.filter(subcategory=pk)
+        serializer = ProductSerializer(products, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
