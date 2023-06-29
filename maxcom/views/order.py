@@ -8,7 +8,7 @@ from rest_framework.authentication import TokenAuthentication
 from ..models import (
     Card,
     Product,
-    Order,z
+    Order,
 )
 
 from ..serializers import (
