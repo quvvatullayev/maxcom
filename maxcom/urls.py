@@ -116,3 +116,19 @@ urlpatterns += [
     path('certificate/get/<int:pk>/', CertificateGetIdView.as_view()),
     path('certificate/delete/<int:pk>/', CertificateDeleteView.as_view()),
 ]
+
+from .views.contaket import(
+    ContaketCreateView,
+    ContaketUpdateView,
+    ContaketGetView,
+    ContaketGetIdView,
+    ContaketDeleteView,
+)
+
+urlpatterns += [
+    path('contaket/create/', ContaketCreateView.as_view()),
+    path('contaket/update/<int:pk>/', ContaketUpdateView.as_view()),
+    path('contaket/get/', ContaketGetView.as_view()),
+    path('contaket/get/<int:pk>/', ContaketGetIdView.as_view()),
+    path('contaket/delete/<int:pk>/', ContaketDeleteView.as_view()),
+]
