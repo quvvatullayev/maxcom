@@ -164,3 +164,11 @@ urlpatterns += [
     path('companyquestion/get/<int:pk>/', CompanyQuestionGetIdView.as_view()),
     path('companyquestion/delete/<int:pk>/', CompanyQuestionDeleteView.as_view()),
 ]
+
+from .views.home import(
+    HomeView,
+)
+
+urlpatterns += [
+    path('', HomeView.as_view()),
+]
