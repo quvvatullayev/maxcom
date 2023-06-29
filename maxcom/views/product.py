@@ -94,9 +94,15 @@ class ProductGetIdView(APIView):
         serializer = ProductSerializer(product)
         product_image = ProductImage.objects.filter(product=product)
         serializer_image = ProductImageSerializer(product_image, many=True)
+
+        breand = product.brand
+        breand = Product.objects.filter(brand=breand)
+        serializer_breand = ProductSerializer(breand, many=True)
+        
         data = {
             'product': serializer.data,
-            'product_image': serializer_image.data
+            'product_image': serializer_image.data,
+            'breand': serializer_breand.data
         }
         return Response(data, status=status.HTTP_200_OK)
     
