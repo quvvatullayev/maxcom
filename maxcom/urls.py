@@ -174,3 +174,15 @@ from .views.home import(
 urlpatterns += [
     path('', HomeView.as_view()),
 ]
+
+from .views.userauth import(
+    UserCreateView,
+    UserLoginView,
+    UserLogOutView,
+)
+
+urlpatterns += [
+    path('user/create/', UserCreateView.as_view()),
+    path('user/login/', UserLoginView.as_view()),
+    path('user/logout/', UserLogOutView.as_view()),
+]
