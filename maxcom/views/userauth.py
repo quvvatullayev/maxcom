@@ -76,3 +76,22 @@ class UserListView(APIView):
         serializer = UserSerializer(users, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
+class UserAddAdminView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+    @swagger_auto_schema(
+        operation_description="Add admin",
+        responses={
+            200: UserSerializer,
+            400: "Bad request",
+        }
+    )
+    def post(self, request:Request, pk:int):
+        r_user = request.user
+        if not r_user.is_staff:
+            user = User.objects.get(id=pk)
+            user.is_staff = True
+            user.save()
+            return Response({'message':'You are admin'}, status=status.HTTP_200_OK)
+        return Response({'message':'You are not admin'}, status=status.HTTP_400_BAD_REQUEST)
+        

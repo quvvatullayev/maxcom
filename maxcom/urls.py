@@ -179,12 +179,14 @@ from .views.userauth import(
     UserCreateView,
     UserLoginView,
     UserLogOutView,
-    UserListView
+    UserListView,
+    UserAddAdminView,
 )
 
 urlpatterns += [
     path('user/create/', UserCreateView.as_view()),
     path('user/login/', UserLoginView.as_view()),
     path('user/logout/', UserLogOutView.as_view()),
-    path('user/list/', UserListView.as_view())
+    path('user/list/', UserListView.as_view()),
+    path('user/add/admin/<int:pk>/', UserAddAdminView.as_view()),
 ]
