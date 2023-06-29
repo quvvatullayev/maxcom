@@ -3,14 +3,23 @@ from rest_framework.response import Response
 from rest_framework.request import Request
 from rest_framework import status
 from drf_yasg.utils import swagger_auto_schema
+from drf_yasg import openapi
 from ..models import (
     Product,
     ProductImage,
+    Category,
+    SubCategory,
+    Certificate,
+    Contaket,
 )
 from ..serializers import (
     ProductSerializer,
     CreateProductSerializer,
     ProductImageSerializer,
+    CategorySerializer,
+    SubCategorySerializer,
+    CertificateSerializer,
+    ContaketSerializer,
 )
 
 class ProductCreateView(APIView):
@@ -110,11 +119,99 @@ class ProductGetSubCategoryView(APIView):
         operation_description="Get products by subcategory",
         operation_summary="Get products by subcategory",
         responses={
-            200: ProductSerializer,
-            400: "Bad request"
-        }
+            200:openapi.Response(
+            description="Get products by subcategory",
+            examples={
+                "application/json": {
+                    "products": [
+                        {
+                            "id": 1,
+                            "subcategory": 1,
+                            "name": "product name",
+                            "brand": "product brand",
+                            "description": "product description",
+                            "price": 1000.0,
+                            "discount": 0.0,
+                            "image": "http://",
+                            "short_description": "product short description",
+                            "live": False,
+                            "likes": False,
+                            "status": False
+                        }
+                    ],
+                    "categorys": [
+                        {
+                            "id": 1,
+                            "name": "category name",
+                            "description": "category description",
+                            "image": "http://",
+                            "sub_category": [
+                                {
+                                    "id": 1,
+                                    "category": 1,
+                                    "name": "subcategory name",
+                                    "description": "subcategory description"
+                                }
+                            ]
+                        }
+                    ],
+                    "certificate": [
+                        {
+                            "id": 1,
+                            "name": "certificate name",
+                            "image": "http://"
+                        }
+                    ],
+                    "contact": [
+                        {
+                            "id": 1,
+                            "name": "contact name",
+                            "phone": "contact phone",
+                            "email": "contact email",
+                            "address": "contact address",
+                            "facebook": "contact facebook",
+                            "instagram": "contact instagram",
+                            "telegram": "contact telegram",
+                            "map": "contact map"
+                        }
+                    ]
+                }
+            }
+        )
+    }
     )
     def get(self, request: Request, pk: int):
         products = Product.objects.filter(subcategory=pk)
         serializer = ProductSerializer(products, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+
+        # categorys
+        categorys = Category.objects.all()
+        serializer_categorys = CategorySerializer(categorys, many=True)
+
+        categorys_list = []
+        for category in serializer_categorys.data:
+            category_id = category['id']
+            
+            sub_category = SubCategory.objects.filter(category=category_id)
+            serializer_SubCategorys = SubCategorySerializer(sub_category, many=True)
+
+            category['sub_category'] = serializer_SubCategorys.data
+            categorys_list.append(category)
+
+        # Certificate
+        certificate = Certificate.objects.all()
+        certificate_serializer = CertificateSerializer(certificate, many = True)
+
+        # contact
+        contact = Contaket.objects.all()
+        serializer_contact = ContaketSerializer(contact, many=True)
+
+        data = {
+            'products': serializer.data,
+            'categorys': categorys_list,
+            'certificate': certificate_serializer.data,
+            'contact': serializer_contact.data,
+        }
+        
+        
+        return Response(data, status=status.HTTP_200_OK)
