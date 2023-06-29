@@ -60,3 +60,19 @@ class UserLogOutView(APIView):
         token = Token.objects.get(user = user)
         token.delete()
         return Response({'message':'Logout'}, status=status.HTTP_200_OK)
+    
+class UserListView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+    @swagger_auto_schema(
+        operation_description="Get all users",
+        responses={
+            200: UserSerializer,
+            400: "Bad request",
+        }
+    )
+    def get(self, request:Request):
+        users = User.objects.all()
+        serializer = UserSerializer(users, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    

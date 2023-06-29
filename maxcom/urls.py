@@ -179,10 +179,12 @@ from .views.userauth import(
     UserCreateView,
     UserLoginView,
     UserLogOutView,
+    UserListView
 )
 
 urlpatterns += [
     path('user/create/', UserCreateView.as_view()),
     path('user/login/', UserLoginView.as_view()),
     path('user/logout/', UserLogOutView.as_view()),
+    path('user/list/', UserListView.as_view())
 ]
