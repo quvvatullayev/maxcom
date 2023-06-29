@@ -12,6 +12,7 @@ from .models import (
     About,
     CompanyQuestion,
     Order,
+    CallBack,
 )
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -112,3 +113,10 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['id', 'username', 'password', 'email']       
+
+class CallBackSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CallBack
+        fields = "__all__"
+
+    

@@ -100,3 +100,12 @@ class CompanyQuestion(models.Model):
 
     def __str__(self) -> str:
         return self.question
+
+class CallBack(models.Model):
+    name = models.CharField(max_length=225)
+    phone = models.CharField(max_length=20)
+    date = models.DateTimeField(auto_now_add=True)
+    cheak = models.BooleanField(default=False)
+
+    def __str__(self) -> str:
+        return self.name

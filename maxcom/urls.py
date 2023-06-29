@@ -192,3 +192,14 @@ urlpatterns += [
     path('user/add/admin/<int:pk>/', UserAddAdminView.as_view()),
     path('user/delete/admin/<int:pk>/', UserDeleteAdminView.as_view()),
 ]
+
+from .views.callback import(
+    CallBackCreateView,
+    CallBackDeleteView,
+)
+
+urlpatterns += [
+    path('callback/create/', CallBackCreateView.as_view()),
+    path('callback/delete/<int:pk>/', CallBackDeleteView.as_view()),
+]
+
