@@ -95,10 +95,19 @@ class ProductGetIdView(APIView):
         product_image = ProductImage.objects.filter(product=product)
         serializer_image = ProductImageSerializer(product_image, many=True)
 
+        short_description = product.short_description.split(';')
+        short_description_data = []
+        for short in short_description:
+            short_data = {}
+            short_data[short.split('==')[0].strip()] = short.split('==')[1].strip()
+            short_description_data.append(short_data)
+
+        product.short_description = short_description_data
+
         breand = product.brand
         breand = Product.objects.filter(brand=breand)
         serializer_breand = ProductSerializer(breand, many=True)
-        
+
         data = {
             'product': serializer.data,
             'product_image': serializer_image.data,
