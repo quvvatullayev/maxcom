@@ -169,10 +169,12 @@ urlpatterns += [
 
 from .views.home import(
     HomeView,
+    SearchView,
 )
 
 urlpatterns += [
     path('', HomeView.as_view()),
+    path('search/', SearchView.as_view()),
 ]
 
 from .views.userauth import(

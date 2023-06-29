@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
+from django.db.models import Q
 # this is home page
 from ..models import (
     Product,
@@ -190,3 +191,23 @@ class HomeView(APIView):
 
         return Response(data, status=status.HTTP_200_OK)
 
+class SearchView(APIView):
+    @swagger_auto_schema(
+        operation_description="Search product",
+        operation_summary="Search product",
+        responses={
+            200: ProductSerializer(many=True),
+            400: "Bad request"
+        }
+    )
+    def get(self, request:Request):
+        query = request.GET.get('query')
+        print(query)
+        products = Product.objects.filter(
+            Q(name__icontains              = query) |
+            Q(description__icontains       = query) |
+            Q(brand__icontains             = query) ,   
+            )
+        serializer = ProductSerializer(products, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
