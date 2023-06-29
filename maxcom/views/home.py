@@ -3,6 +3,7 @@ from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework import status
 from drf_yasg.utils import swagger_auto_schema
+from drf_yasg import openapi
 # this is home page
 from ..models import (
     Product,
@@ -31,7 +32,104 @@ from ..serializers import (
     SubCategorySerializer,
 )
 
-class HomeView(APIView):
+class HomeView(APIView): 
+    @swagger_auto_schema(
+        operation_description="Home page",
+        operation_summary="Home page",
+        responses={
+            200: openapi.Response(
+                description="Get all product",
+                examples={
+                    "application/json": {
+                        "products_deduct": [
+                            {
+                                "id": 1,
+                                "subcategory": 1,
+                                "name": "product name",
+                                "brand": "product brand",
+                                "description": "product description",
+                                "price": 1000.0,
+                                "discount": 0.0,
+                                "image": "http://",
+                                "short_description": "product short description",
+                                "live": False,
+                                "likes": False,
+                                "status": False
+                            }
+                        ],
+                        "products_new": [
+                            {
+                                "id": 1,
+                                "subcategory": 1,
+                                "name": "product name",
+                                "brand": "product brand",
+                                "description": "product description",
+                                "price": 1000.0,
+                                "discount": 0.0,
+                                "image": "http://",
+                                "short_description": "product short description",
+                                "live": False,
+                                "likes": False,
+                                "status": False
+                            }
+                        ],
+                        "contact": [
+                            {
+                                "id": 1,
+                                "name": "contact name",
+                                "phone": "contact phone",
+                                "email": "contact email",
+                                "address": "contact address",
+                                "facebook": "contact facebook",
+                                "instagram": "contact instagram",
+                                "telegram": "contact telegram",
+                                "map": "contact map"
+                            }
+                        ],
+                        "categorys": [
+                            {
+                                "id": 1,
+                                "name": "category name",
+                                "image": "http://",
+                                "sub_category": [
+                                    {
+                                        "id": 1,
+                                        "name": "sub category name",
+                                        "category": 1
+                                    }
+                                ]
+                            }
+                        ],
+                        "most_sold_product": [
+                            {
+                                "id": 1,
+                                "subcategory": 1,
+                                "name": "product name",
+                                "brand": "product brand",
+                                "description": "product description",
+                                "price": 1000.0,
+                                "discount": 0.0,
+                                "image": "http://",
+                                "short_description": "product short description",
+                                "live": False,
+                                "likes": False,
+                                "status": False
+                            }
+                        ],
+                        "certificate": [
+                            {
+                                "id": 1,
+                                "name": "certificate name",
+                                "image": "http://"
+                            }
+                        ]
+                    }
+                }
+            ),
+
+            400: "Bad request"
+        }
+    )
     def get(self, request:Request):
         # deduct
         # fjilter discount > 0
