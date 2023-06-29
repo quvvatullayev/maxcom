@@ -198,6 +198,7 @@ from .views.callback import(
     CallBackDeleteView,
     CallBackListView,
     CallBackDetailView,
+    CallBackUpdateView,
 )
 
 urlpatterns += [
@@ -205,5 +206,6 @@ urlpatterns += [
     path('callback/delete/<int:pk>/', CallBackDeleteView.as_view()),
     path('callback/list/', CallBackListView.as_view()),
     path('callback/detail/<int:pk>/', CallBackDetailView.as_view()),
+    path('callback/update/<int:pk>/', CallBackUpdateView.as_view()),
 ]
 

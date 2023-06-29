@@ -70,6 +70,22 @@ class CallBackDetailView(APIView):
         callback = CallBack.objects.get(id=pk)
         serializer = CallBackSerializer(callback)
         return Response(serializer.data, status=status.HTTP_200_OK)
-
+    
+class CallBackUpdateView(APIView):
+    @swagger_auto_schema(
+        operation_description="Update callback",
+        request_body=CallBackSerializer,
+        responses={
+            200: CallBackSerializer,
+            400: "Bad request",
+        }
+    )
+    def put(self, request: Request, pk: int):
+        callback = CallBack.objects.get(id=pk)
+        callback.cheak = True
+        callback.save()
+        serializer = CallBackSerializer(callback)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
 
 
