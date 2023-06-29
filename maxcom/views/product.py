@@ -120,8 +120,9 @@ class ProductGetIdView(APIView):
         for subcategory in serializer_subcategorys.data:
             subcategory_id = subcategory['id']
             subproducts = Product.objects.filter(subcategory=subcategory_id)
-            serializer_subproducts = ProductSerializer(subproducts, many=True)
-            product_subcategorys += serializer_subproducts.data
+            if subproducts:
+                serializer_subproducts = ProductSerializer(subproducts, many=True)
+                product_subcategorys.append(serializer_subproducts.data[:1])
 
 
         data = {
