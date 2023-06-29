@@ -13,6 +13,7 @@ from .models import (
     About,
     CompanyQuestion,
     Order,
+    CallBack,
 )
 
 admin.site.register(Category)
@@ -26,3 +27,4 @@ admin.site.register(Certificate)
 admin.site.register(Contaket)
 admin.site.register(About)
 admin.site.register(CompanyQuestion)
+admin.site.register(CallBack)
