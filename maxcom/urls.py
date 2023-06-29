@@ -148,3 +148,19 @@ urlpatterns += [
     path('about/get/<int:pk>/', AboutGetIdView.as_view()),
     path('about/delete/<int:pk>/', AboutDeleteView.as_view()),
 ]
+
+from .views.companyquestion import(
+    CompanyQuestionCreateView,
+    CompanyQuestionUpdateView,
+    CompanyQuestionGetView,
+    CompanyQuestionGetIdView,
+    CompanyQuestionDeleteView,
+)
+
+urlpatterns += [
+    path('companyquestion/create/', CompanyQuestionCreateView.as_view()),
+    path('companyquestion/update/<int:pk>/', CompanyQuestionUpdateView.as_view()),
+    path('companyquestion/get/', CompanyQuestionGetView.as_view()),
+    path('companyquestion/get/<int:pk>/', CompanyQuestionGetIdView.as_view()),
+    path('companyquestion/delete/<int:pk>/', CompanyQuestionDeleteView.as_view()),
+]
