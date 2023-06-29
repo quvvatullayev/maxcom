@@ -132,3 +132,19 @@ urlpatterns += [
     path('contaket/get/<int:pk>/', ContaketGetIdView.as_view()),
     path('contaket/delete/<int:pk>/', ContaketDeleteView.as_view()),
 ]
+
+from .views.about import(
+    AboutCreateView,
+    AboutUpdateView,
+    AboutGetView,
+    AboutGetIdView,
+    AboutDeleteView,
+)
+
+urlpatterns += [
+    path('about/create/', AboutCreateView.as_view()),
+    path('about/update/<int:pk>/', AboutUpdateView.as_view()),
+    path('about/get/', AboutGetView.as_view()),
+    path('about/get/<int:pk>/', AboutGetIdView.as_view()),
+    path('about/delete/<int:pk>/', AboutDeleteView.as_view()),
+]
