@@ -5,10 +5,12 @@ from rest_framework import status
 from drf_yasg.utils import swagger_auto_schema
 from ..models import (
     Product,
+    ProductImage,
 )
 from ..serializers import (
     ProductSerializer,
     CreateProductSerializer,
+    ProductImageSerializer,
 )
 
 class ProductCreateView(APIView):
@@ -81,7 +83,13 @@ class ProductGetIdView(APIView):
     def get(self, request: Request, pk: int):
         product = Product.objects.get(pk=pk)
         serializer = ProductSerializer(product)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        product_image = ProductImage.objects.filter(product=product)
+        serializer_image = ProductImageSerializer(product_image, many=True)
+        data = {
+            'product': serializer.data,
+            'product_image': serializer_image.data
+        }
+        return Response(data, status=status.HTTP_200_OK)
     
 class ProductGetView(APIView):
     @swagger_auto_schema(
