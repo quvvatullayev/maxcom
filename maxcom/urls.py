@@ -100,3 +100,19 @@ urlpatterns += [
     path('order/delete/<int:pk>/', OrderDeleteView.as_view()),
     path('order/get/', OrderGetView.as_view()),
 ]
+
+from .views.certificate import(
+    CertificateCreateView,
+    CertificateUpdateView,
+    CertificateGetView,
+    CertificateGetIdView,
+    CertificateDeleteView,
+)
+
+urlpatterns += [
+    path('certificate/create/', CertificateCreateView.as_view()),
+    path('certificate/update/<int:pk>/', CertificateUpdateView.as_view()),
+    path('certificate/get/', CertificateGetView.as_view()),
+    path('certificate/get/<int:pk>/', CertificateGetIdView.as_view()),
+    path('certificate/delete/<int:pk>/', CertificateDeleteView.as_view()),
+]
