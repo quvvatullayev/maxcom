@@ -18,6 +18,7 @@ from ..models import (
     Contaket,
     About,
     CompanyQuestion,
+    Brand,
 )
 from ..serializers import (
     ProductSerializer,
@@ -31,6 +32,7 @@ from ..serializers import (
     CompanyQuestionSerializer,
     CategorySerializer,
     SubCategorySerializer,
+    BrandSerializer,
 )
 
 class HomeView(APIView): 
@@ -123,6 +125,13 @@ class HomeView(APIView):
                                 "name": "certificate name",
                                 "image": "http://"
                             }
+                        ],
+                        'brands':[
+                            {
+                                "id": 1,
+                                "name": "brand name",
+                                "image": "http://"
+                            }
                         ]
                     }
                 }
@@ -179,6 +188,9 @@ class HomeView(APIView):
         certificate = Certificate.objects.all()
         certificate_serializer = CertificateSerializer(certificate, many = True)
         
+        # Brand
+        brands = Brand.objects.all()
+        brand_serializer = BrandSerializer(brands, many = True)
             
         data = {
             'products_deduct': serializer_deduct.data,
@@ -186,7 +198,8 @@ class HomeView(APIView):
             'contact': serializer_contact.data,
             'categorys': categorys_list,
             'most_sold_product':most_sold_product,
-            'certificate':certificate_serializer.data
+            'certificate':certificate_serializer.data,
+            'brands':brand_serializer.data,
         }
 
         return Response(data, status=status.HTTP_200_OK)
