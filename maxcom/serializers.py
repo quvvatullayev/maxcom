@@ -13,6 +13,7 @@ from .models import (
     CompanyQuestion,
     Order,
     CallBack,
+    Brand,
 )
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -119,4 +120,8 @@ class CallBackSerializer(serializers.ModelSerializer):
         model = CallBack
         fields = "__all__"
 
+class BrandSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Brand
+        fields = "__all__"
     

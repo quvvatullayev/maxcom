@@ -18,10 +18,18 @@ class SubCategory(models.Model):
     def __str__(self):
         return self.name
     
+class Brand(models.Model):
+    name = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='brands')
+
+    def __str__(self):
+        return self.name
+    
 class Product(models.Model):
     subcategory = models.ForeignKey(SubCategory, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     brand = models.CharField(max_length=100)
+    brand_img = models.ForeignKey(Brand, on_delete=models.CASCADE, null=True, blank=True)
     description = models.TextField()
     price = models.FloatField()
     discount = models.FloatField(default=0)
