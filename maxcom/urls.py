@@ -211,3 +211,18 @@ urlpatterns += [
     path('callback/update/<int:pk>/', CallBackUpdateView.as_view()),
 ]
 
+from .views.brand import(
+    BrandCreateView,
+    BrandDeleteView,
+    BrandListView,
+    BrandDetailView,
+    BrandUpdateView,
+)
+
+urlpatterns += [
+    path('brand/create/', BrandCreateView.as_view()),
+    path('brand/delete/<int:pk>/', BrandDeleteView.as_view()),
+    path('brand/list/', BrandListView.as_view()),
+    path('brand/detail/<int:pk>/', BrandDetailView.as_view()),
+    path('brand/update/<int:pk>/', BrandUpdateView.as_view()),
+]
