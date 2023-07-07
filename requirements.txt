@@ -4,3 +4,4 @@ django-cors-headers
 Pillow
 drf-yasg
 django-modeltranslation
+smtplib
